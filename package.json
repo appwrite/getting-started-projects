@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "turbo run dev --parallel"
+    "dev": "turbo run dev --parallel",
+    "dev:svelte": "turbo run dev --parallel --filter='./svelte/*'",
+    "dev:react": "turbo run dev --parallel --filter='./react/*'"
   },
   "keywords": [],
   "author": "",
