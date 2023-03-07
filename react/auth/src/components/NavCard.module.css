@@ -1,0 +1,13 @@
+.card {
+  display: grid;
+  place-items: center;
+  width: 8rem;
+  height: 8rem;
+  padding: 0;
+
+  text-align: center;
+}
+
+.card [class^="icon-"] {
+  font-size: 1.5rem;
+}
