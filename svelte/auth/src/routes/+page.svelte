@@ -2,9 +2,8 @@
 	import { invalidateAll } from '$app/navigation';
 	import NavCard from '$components/NavCard.svelte';
 	import { appwrite } from '$lib/appwrite';
-	import type { PageData } from './$types';
 
-	export let data: PageData;
+	export let data;
 
 	$: loggedIn = !!data.account;
 
