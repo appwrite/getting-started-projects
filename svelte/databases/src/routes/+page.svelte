@@ -6,6 +6,7 @@
 	import type { Framework } from './+page';
 	import AddModal from './AddModal.svelte';
 	import EditModal from './EditModal.svelte';
+
 	export let data: PageData;
 
 	function formatNumber(num: number) {
@@ -104,6 +105,28 @@
 			</table>
 		</div>
 	</div>
+
+	<nav class="pagination">
+		<a
+			href={data.prevPageUrl}
+			class="button is-text"
+			class:is-disabled={data.prevPageUrl === null}
+			aria-label="prev page"
+		>
+			<span class="icon-cheveron-left" aria-hidden="true" />
+			<span class="text">Prev</span>
+		</a>
+
+		<a
+			href={data.nextPageUrl}
+			class="button is-text"
+			class:is-disabled={data.nextPageUrl === null}
+			aria-label="next page"
+		>
+			<span class="text">Next</span>
+			<span class="icon-cheveron-right" aria-hidden="true" />
+		</a>
+	</nav>
 </div>
 
 <AddModal bind:dialog={addModal} />

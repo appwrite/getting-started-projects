@@ -8,7 +8,65 @@ importers:
     devDependencies:
       turbo: 1.8.3
 
+  react/auth:
+    specifiers:
+      '@appwrite.io/pink': ^0.0.5
+      '@appwrite.io/pink-icons': ^0.0.5
+      '@fontsource/poppins': ^4.5.10
+      '@types/react': ^18.0.27
+      '@types/react-dom': ^18.0.10
+      '@vitejs/plugin-react': ^3.1.0
+      appwrite: ^10.2.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      react-router-dom: ^6.8.2
+      typescript: ^4.9.3
+      vite: ^4.1.0
+    dependencies:
+      '@appwrite.io/pink': 0.0.5
+      '@appwrite.io/pink-icons': 0.0.5
+      '@fontsource/poppins': 4.5.10
+      appwrite: 10.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-router-dom: 6.8.2_biqbaboplfbrettd7655fr4n2y
+    devDependencies:
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      '@vitejs/plugin-react': 3.1.0_vite@4.1.4
+      typescript: 4.9.5
+      vite: 4.1.4
+
   react/base:
+    specifiers:
+      '@appwrite.io/pink': ^0.0.5
+      '@appwrite.io/pink-icons': ^0.0.5
+      '@fontsource/poppins': ^4.5.10
+      '@types/react': ^18.0.27
+      '@types/react-dom': ^18.0.10
+      '@vitejs/plugin-react': ^3.1.0
+      appwrite: ^10.2.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      react-router-dom: ^6.8.2
+      typescript: ^4.9.3
+      vite: ^4.1.0
+    dependencies:
+      '@appwrite.io/pink': 0.0.5
+      '@appwrite.io/pink-icons': 0.0.5
+      '@fontsource/poppins': 4.5.10
+      appwrite: 10.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-router-dom: 6.8.2_biqbaboplfbrettd7655fr4n2y
+    devDependencies:
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      '@vitejs/plugin-react': 3.1.0_vite@4.1.4
+      typescript: 4.9.5
+      vite: 4.1.4
+
+  react/databases:
     specifiers:
       '@appwrite.io/pink': ^0.0.5
       '@appwrite.io/pink-icons': ^0.0.5
