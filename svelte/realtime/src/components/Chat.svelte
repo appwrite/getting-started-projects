@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { PUBLIC_APPWRITE_COLLECTION_ID, PUBLIC_APPWRITE_DB_ID } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
-	import { session } from '$lib/session';
+
 	import { messages, type Message } from '$stores/messages';
+	import { userId } from '$stores/user';
+	import { Permission, Role } from 'appwrite';
 	import { fly } from 'svelte/transition';
 
 	export let source: 'left' | 'right';
@@ -19,19 +21,19 @@
 	});
 
 	async function sendMessage() {
-		if (!value) return;
+		if (!value || !$userId) return;
 
 		const message: Message = {
 			text: value,
-			source,
-			sessionId: session
+			source
 		};
 		localMessages = [...localMessages, message];
 		appwrite.databases.createDocument(
 			PUBLIC_APPWRITE_DB_ID,
 			PUBLIC_APPWRITE_COLLECTION_ID,
 			'unique()',
-			message
+			message,
+			[Permission.read(Role.user($userId))]
 		);
 		value = '';
 		input.focus();
@@ -42,8 +44,8 @@
 <div class="card">
 	<div class="messages">
 		<ul class="u-grid u-gap-16">
-			{#each localMessages as message}
-				<li in:fly={{ y: 32 }}>
+			{#each localMessages as message, index (index)}
+				<li in:fly|local={{ y: 32 }}>
 					<span data-message={message.source === source ? 'sent' : 'incoming'}>
 						{message.text}
 					</span>

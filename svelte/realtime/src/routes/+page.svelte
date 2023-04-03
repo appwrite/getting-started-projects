@@ -21,10 +21,12 @@
 </script>
 
 <div class="container">
-	<div class="u-flex u-gap-32 u-margin-block-start-32 u-cross-center">
-		<Chat source="left" />
-		<i class="icon-switch-horizontal" />
-		<Chat source="right" />
+	<div>
+		<div class="u-flex u-gap-32 u-margin-block-start-32 u-cross-center">
+			<Chat source="left" />
+			<i class="icon-switch-horizontal" />
+			<Chat source="right" />
+		</div>
 	</div>
 </div>
 
