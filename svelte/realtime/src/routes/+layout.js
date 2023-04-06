@@ -17,11 +17,11 @@ export const ssr = false;
 
 export const load = async () => {
 	const session = await getSession();
-	const response = await appwrite.databases.listDocuments(
+	const { documents } = await appwrite.databases.listDocuments(
 		PUBLIC_APPWRITE_DB_ID,
 		PUBLIC_APPWRITE_COLLECTION_ID
 	);
 
-	messages.set(response.documents);
+	messages.set(/** @type {import('$lib/types').Message[]} */ (/** @type {unknown} */ (documents)));
 	userId.set(session);
 };

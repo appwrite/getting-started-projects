@@ -1,17 +1,22 @@
-<script lang="ts">
+<script>
 	import { invalidateAll } from '$app/navigation';
 	import { PUBLIC_APPWRITE_COLLECTION, PUBLIC_APPWRITE_DB } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
 
-	export let dialog: HTMLDialogElement;
+	/** @type {HTMLDialogElement} */
+	export let dialog;
 	let loading = false;
 
-	async function submit(event: Event) {
+	/**
+	 *
+	 * @param event {Event}
+	 */
+	async function submit(event) {
 		if (loading) return;
 		loading = true;
 		event.preventDefault();
 
-		const form = event.target as HTMLFormElement;
+		const form = /** @type {HTMLFormElement} */ (event.target);
 		const { name, stars, release_date } = Object.fromEntries(new FormData(form).entries());
 
 		if (!name || !stars || !release_date) {
@@ -26,7 +31,7 @@
 				name,
 				stars: Number(stars),
 				// Should we use a type-guard/zod?
-				release_date: new Date(release_date as string).toISOString()
+				release_date: new Date(/** @type {string} */ (release_date)).toISOString()
 			}
 		);
 		await invalidateAll();
