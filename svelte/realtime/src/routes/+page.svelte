@@ -1,11 +1,15 @@
-<script lang="ts">
+<script>
 	import Chat from '$components/Chat.svelte';
 	import { PUBLIC_APPWRITE_COLLECTION_ID, PUBLIC_APPWRITE_DB_ID } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
-	import { messages, type Message } from '$stores/messages';
+	import { messages } from '$stores/messages';
 	import { onMount } from 'svelte';
 
-	function sleep(ms: number) {
+	/**
+	 * Sleeps for a given amount of time
+	 * @param ms {number}
+	 */
+	function sleep(ms) {
 		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
@@ -14,7 +18,7 @@
 			`databases.${PUBLIC_APPWRITE_DB_ID}.collections.${PUBLIC_APPWRITE_COLLECTION_ID}.documents`,
 			async ({ payload }) => {
 				await sleep(1000);
-				messages.update((prev) => [...prev, payload as Message]);
+				messages.update((prev) => [...prev, payload]);
 			}
 		);
 	});
