@@ -11,6 +11,7 @@
 	export let source;
 
 	let value = '';
+
 	/** @type {HTMLInputElement} */
 	let input;
 
@@ -40,7 +41,6 @@
 		);
 		value = '';
 		input.focus();
-		console.log(input);
 	}
 </script>
 

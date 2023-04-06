@@ -18,7 +18,7 @@
 			`databases.${PUBLIC_APPWRITE_DB_ID}.collections.${PUBLIC_APPWRITE_COLLECTION_ID}.documents`,
 			async ({ payload }) => {
 				await sleep(1000);
-				messages.update((prev) => [...prev, payload]);
+				messages.update((prev) => [...prev, /** @type {import('$lib/types').Message} */ (payload)]);
 			}
 		);
 	});
