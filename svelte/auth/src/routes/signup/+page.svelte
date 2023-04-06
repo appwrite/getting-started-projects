@@ -1,23 +1,25 @@
-<script lang="ts">
+<script>
 	import { invalidateAll } from '$app/navigation';
 	import { appwrite } from '$lib/appwrite';
-	import type { AppwriteException } from 'appwrite';
 
 	let showPassword = false;
 	let loading = false;
-	let formError: string | null = null;
+	/** @type {string | null} */
+	let formError = null;
 
-	async function handleSubmit(event: Event) {
+	/**
+	 * @param {Event} event
+	 */
+	async function handleSubmit(event) {
 		event.preventDefault();
 		loading = true;
 		formError = null;
 
-		const form = event.target as HTMLFormElement;
-		// Should we use zod here? Maybe handle formErrors with JS instead of HTML?
-		const formData = Object.fromEntries(new FormData(form).entries()) as Record<
+		const form = /** @type {HTMLFormElement} */ (event.target);
+		const formData = /** @type Record<
 			string,
 			string | undefined
-		>;
+		> */ (Object.fromEntries(new FormData(form).entries()));
 
 		const { name, email, password } = formData;
 		if (!name || !email || !password) {
@@ -29,9 +31,7 @@
 			await appwrite.account.createEmailSession(email, password);
 			await invalidateAll();
 		} catch (e) {
-			// Should we use a type guard here?
-			const error = e as AppwriteException;
-			formError = error.message;
+			formError = /** @type {import('appwrite').AppwriteException} */ (e).message;
 		}
 		loading = false;
 	}

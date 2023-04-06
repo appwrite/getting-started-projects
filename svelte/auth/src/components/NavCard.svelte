@@ -1,6 +1,8 @@
-<script lang="ts">
-	export let href: string | undefined = undefined;
-	export let icon: string;
+<script>
+	/** @type {string | undefined} */
+	export let href = undefined;
+	/** @type {string} */
+	export let icon;
 </script>
 
 <svelte:element this={href ? 'a' : 'button'} class="card" {href} on:click on:keydown on:keyup>
