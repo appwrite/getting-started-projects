@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import { invalidateAll } from '$app/navigation';
 	import NavCard from '$components/NavCard.svelte';
 	import { appwrite } from '$lib/appwrite';

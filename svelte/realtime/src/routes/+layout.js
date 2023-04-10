@@ -2,7 +2,6 @@ import { PUBLIC_APPWRITE_COLLECTION_ID, PUBLIC_APPWRITE_DB_ID } from '$env/stati
 import { appwrite } from '$lib/appwrite';
 import { messages } from '$stores/messages';
 import { userId } from '$stores/user';
-import type { LayoutLoad } from './$types';
 
 async function getSession() {
 	try {
@@ -16,14 +15,13 @@ async function getSession() {
 
 export const ssr = false;
 
-export const load: LayoutLoad = async () => {
+export const load = async () => {
 	const session = await getSession();
-	const response = await appwrite.databases.listDocuments(
+	const { documents } = await appwrite.databases.listDocuments(
 		PUBLIC_APPWRITE_DB_ID,
 		PUBLIC_APPWRITE_COLLECTION_ID
 	);
 
-	// Should we do validation here?
-	messages.set(response.documents as any);
+	messages.set(/** @type {import('$lib/types').Message[]} */ (/** @type {unknown} */ (documents)));
 	userId.set(session);
 };

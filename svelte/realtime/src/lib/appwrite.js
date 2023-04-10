@@ -6,6 +6,6 @@ client.setEndpoint(PUBLIC_APPWRITE_ENDPOINT).setProject(PUBLIC_APPWRITE_PROJECT)
 
 export const appwrite = {
 	client,
-	databases: new Databases(client),
-	account: new Account(client)
+	account: new Account(client),
+	databases: new Databases(client)
 };

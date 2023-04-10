@@ -1,15 +1,19 @@
-<script lang="ts">
+<script>
 	import { invalidateAll } from '$app/navigation';
 	import { PUBLIC_APPWRITE_COLLECTION, PUBLIC_APPWRITE_DB } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
-	import type { PageData } from './$types';
-	import type { Framework } from './+page';
+
 	import AddModal from './AddModal.svelte';
 	import EditModal from './EditModal.svelte';
 
-	export let data: PageData;
+	export let data;
 
-	function formatNumber(num: number) {
+	/**
+	 * Formats a number to a human readable format
+	 * @param num {number}
+	 *
+	 */
+	function formatNumber(num) {
 		if (num > 999 && num < 1000000) {
 			const decimalPoints = num % 1000 === 0 ? 0 : 1;
 			return (num / 1000).toFixed(decimalPoints) + 'k';
@@ -18,7 +22,11 @@
 		return num;
 	}
 
-	function formatDate(date: string) {
+	/**
+	 * Formats a date to a human readable format
+	 * @param date {string}
+	 */
+	function formatDate(date) {
 		const d = new Date(date);
 		return d.toLocaleDateString('en-UK', {
 			month: 'short',
@@ -27,12 +35,18 @@
 		});
 	}
 
-	let addModal: HTMLDialogElement;
+	/** @type {HTMLDialogElement} */
+	let addModal;
 
-	let editModal: HTMLDialogElement;
-	let editingFramework: Framework | null = null;
+	/** @type {HTMLDialogElement} */
+	let editModal;
+	/** @type {import('$lib/types').Framework | null} */
+	let editingFramework = null;
 
-	async function handleDelete(id: string) {
+	/**
+	 * @param id {string}
+	 */
+	async function handleDelete(id) {
 		await appwrite.databases.deleteDocument(PUBLIC_APPWRITE_DB, PUBLIC_APPWRITE_COLLECTION, id);
 		await invalidateAll();
 	}

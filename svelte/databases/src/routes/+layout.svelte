@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import '@appwrite.io/pink';
 	import '@appwrite.io/pink-icons';
 	import '@fontsource/poppins/400.css';

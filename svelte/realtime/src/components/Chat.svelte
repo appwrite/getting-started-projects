@@ -1,18 +1,22 @@
-<script lang="ts">
+<script>
 	import { PUBLIC_APPWRITE_COLLECTION_ID, PUBLIC_APPWRITE_DB_ID } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
 
-	import { messages, type Message } from '$stores/messages';
+	import { messages } from '$stores/messages';
 	import { userId } from '$stores/user';
 	import { Permission, Role } from 'appwrite';
 	import { fly } from 'svelte/transition';
 
-	export let source: 'left' | 'right';
+	/** @type {import('$lib/types').Source} */
+	export let source;
 
 	let value = '';
-	let input: HTMLInputElement;
 
-	let localMessages: Message[] = [];
+	/** @type {HTMLInputElement} */
+	let input;
+
+	/** @type {import('$lib/types').Message[]} */
+	let localMessages = [];
 
 	messages.subscribe((value) => {
 		if (value.length > localMessages.length) {
@@ -23,7 +27,7 @@
 	async function sendMessage() {
 		if (!value || !$userId) return;
 
-		const message: Message = {
+		const message = {
 			text: value,
 			source
 		};
@@ -37,7 +41,6 @@
 		);
 		value = '';
 		input.focus();
-		console.log(input);
 	}
 </script>
 
@@ -72,13 +75,12 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 50rem;
+		height: 40rem;
 		width: 25rem;
 	}
 
 	.messages {
 		overflow-y: scroll;
-		padding-inline-end: 1rem;
 		flex-grow: 1;
 	}
 
@@ -94,16 +96,17 @@
 		max-width: 15rem;
 	}
 
-	li span[data-message='incoming'] {
-		--clr: hsl(120, 70%, 90%);
+	li span[data-message='sent'] {
+		--clr: hsl(343, 98%, 65%);
 		background-color: var(--clr);
 		border: 1px solid var(--clr);
+		color: white;
+		margin-left: auto;
 	}
 
-	li span[data-message='sent'] {
+	li span[data-message='incoming'] {
 		background-color: hsl(0, 0%, 100%);
 		border: 1px solid hsl(0, 0%, 80%);
-		margin-left: auto;
 	}
 
 	.input-text-wrapper {
