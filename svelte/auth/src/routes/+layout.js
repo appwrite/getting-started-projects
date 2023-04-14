@@ -2,7 +2,6 @@ import { appwrite } from '$lib/appwrite';
 
 export const ssr = false;
 
-/** @type {import('./$types').LayoutLoad} */
 export const load = async () => {
 	try {
 		return {

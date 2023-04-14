@@ -23,6 +23,8 @@
 
 		const { name, email, password } = formData;
 		if (!name || !email || !password) {
+			formError = 'Please fill out all fields';
+			loading = false;
 			return;
 		}
 

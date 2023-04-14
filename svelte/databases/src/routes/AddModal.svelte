@@ -8,7 +8,6 @@
 	let loading = false;
 
 	/**
-	 *
 	 * @param event {Event}
 	 */
 	async function submit(event) {

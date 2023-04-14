@@ -16,13 +16,14 @@
 		formError = null;
 
 		const form = /** @type {HTMLFormElement} */ (event.target);
-		const formData = /** @type Record<
-			string,
-			string | undefined
-		> */ (Object.fromEntries(new FormData(form).entries()));
+		const formData = /** @type Record<string, string | undefined> */ (
+			Object.fromEntries(new FormData(form).entries())
+		);
 
 		const { email, password } = formData;
 		if (!email || !password) {
+			formError = 'Please fill out all fields';
+			loading = false;
 			return;
 		}
 
