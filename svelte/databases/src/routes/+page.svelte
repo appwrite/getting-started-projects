@@ -3,8 +3,8 @@
 	import { PUBLIC_APPWRITE_COLLECTION, PUBLIC_APPWRITE_DB } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
 
-	import AddModal from './AddModal.svelte';
-	import EditModal from './EditModal.svelte';
+	import AddModal from '$components/AddModal.svelte';
+	import EditModal from '$components/EditModal.svelte';
 
 	export let data;
 
