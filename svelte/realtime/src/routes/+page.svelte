@@ -1,6 +1,6 @@
 <script>
 	import Chat from '$components/Chat.svelte';
-	import { PUBLIC_APPWRITE_COLLECTION_ID, PUBLIC_APPWRITE_DB_ID } from '$env/static/public';
+	import { PUBLIC_APPWRITE_COLLECTION, PUBLIC_APPWRITE_DB } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
 	import { messages } from '$stores/messages';
 	import { onMount } from 'svelte';
@@ -15,7 +15,7 @@
 
 	onMount(() => {
 		appwrite.client.subscribe(
-			`databases.${PUBLIC_APPWRITE_DB_ID}.collections.${PUBLIC_APPWRITE_COLLECTION_ID}.documents`,
+			`databases.${PUBLIC_APPWRITE_DB}.collections.${PUBLIC_APPWRITE_COLLECTION}.documents`,
 			async ({ payload }) => {
 				await sleep(1000);
 				messages.update((prev) => [...prev, /** @type {import('$lib/types').Message} */ (payload)]);

@@ -2,6 +2,7 @@
 	import { invalidateAll } from '$app/navigation';
 	import { PUBLIC_APPWRITE_COLLECTION, PUBLIC_APPWRITE_DB } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
+	import { ID } from 'appwrite';
 
 	/** @type {HTMLDialogElement} */
 	export let dialog;
@@ -12,31 +13,33 @@
 	 */
 	async function submit(event) {
 		if (loading) return;
-		loading = true;
 		event.preventDefault();
+		loading = true;
 
-		const form = /** @type {HTMLFormElement} */ (event.target);
-		const { name, stars, release_date } = Object.fromEntries(new FormData(form).entries());
+		try {
+			const form = /** @type {HTMLFormElement} */ (event.target);
+			const { name, stars, release_date } = Object.fromEntries(new FormData(form).entries());
 
-		if (!name || !stars || !release_date) {
-			return;
-		}
-
-		await appwrite.databases.createDocument(
-			PUBLIC_APPWRITE_DB,
-			PUBLIC_APPWRITE_COLLECTION,
-			'unique()',
-			{
-				name,
-				stars: Number(stars),
-				// Should we use a type-guard/zod?
-				release_date: new Date(/** @type {string} */ (release_date)).toISOString()
+			if (!name || !stars || !release_date) {
+				return;
 			}
-		);
-		await invalidateAll();
 
-		dialog.close();
-		loading = false;
+			await appwrite.databases.createDocument(
+				PUBLIC_APPWRITE_DB,
+				PUBLIC_APPWRITE_COLLECTION,
+				ID.unique(),
+				{
+					name,
+					stars: Number(stars),
+					// Should we use a type-guard/zod?
+					release_date: new Date(/** @type {string} */ (release_date)).toISOString()
+				}
+			);
+			await invalidateAll();
+		} finally {
+			dialog.close();
+			loading = false;
+		}
 	}
 </script>
 

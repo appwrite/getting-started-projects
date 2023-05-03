@@ -1,10 +1,10 @@
 <script>
-	import { PUBLIC_APPWRITE_COLLECTION_ID, PUBLIC_APPWRITE_DB_ID } from '$env/static/public';
+	import { PUBLIC_APPWRITE_COLLECTION, PUBLIC_APPWRITE_DB } from '$env/static/public';
 	import { appwrite } from '$lib/appwrite';
 
 	import { messages } from '$stores/messages';
 	import { userId } from '$stores/user';
-	import { Permission, Role } from 'appwrite';
+	import { ID, Permission, Role } from 'appwrite';
 	import { fly } from 'svelte/transition';
 
 	/** @type {import('$lib/types').Source} */
@@ -33,9 +33,9 @@
 		};
 		localMessages = [...localMessages, message];
 		appwrite.databases.createDocument(
-			PUBLIC_APPWRITE_DB_ID,
-			PUBLIC_APPWRITE_COLLECTION_ID,
-			'unique()',
+			PUBLIC_APPWRITE_DB,
+			PUBLIC_APPWRITE_COLLECTION,
+			ID.unique(),
 			message,
 			[Permission.read(Role.user($userId))]
 		);

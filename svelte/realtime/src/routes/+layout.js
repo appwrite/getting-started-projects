@@ -1,4 +1,4 @@
-import { PUBLIC_APPWRITE_COLLECTION_ID, PUBLIC_APPWRITE_DB_ID } from '$env/static/public';
+import { PUBLIC_APPWRITE_COLLECTION, PUBLIC_APPWRITE_DB } from '$env/static/public';
 import { appwrite } from '$lib/appwrite';
 import { messages } from '$stores/messages';
 import { userId } from '$stores/user';
@@ -18,8 +18,8 @@ export const ssr = false;
 export const load = async () => {
 	const session = await getSession();
 	const { documents } = await appwrite.databases.listDocuments(
-		PUBLIC_APPWRITE_DB_ID,
-		PUBLIC_APPWRITE_COLLECTION_ID
+		PUBLIC_APPWRITE_DB,
+		PUBLIC_APPWRITE_COLLECTION
 	);
 
 	messages.set(/** @type {import('$lib/types').Message[]} */ (/** @type {unknown} */ (documents)));

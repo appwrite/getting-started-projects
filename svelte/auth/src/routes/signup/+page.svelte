@@ -1,6 +1,7 @@
 <script>
 	import { invalidateAll } from '$app/navigation';
 	import { appwrite } from '$lib/appwrite';
+	import { ID } from 'appwrite';
 
 	let showPassword = false;
 	let loading = false;
@@ -29,7 +30,7 @@
 		}
 
 		try {
-			await appwrite.account.create('unique()', email, password, name);
+			await appwrite.account.create(ID.unique(), email, password, name);
 			await appwrite.account.createEmailSession(email, password);
 			await invalidateAll();
 		} catch (e) {
