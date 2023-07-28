@@ -14,7 +14,7 @@
 	}
 
 	onMount(() => {
-		appwrite.client.subscribe(
+		return appwrite.client.subscribe(
 			`databases.${PUBLIC_APPWRITE_DB}.collections.${PUBLIC_APPWRITE_COLLECTION}.documents`,
 			async ({ payload }) => {
 				await sleep(1000);
